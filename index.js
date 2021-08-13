@@ -49,6 +49,13 @@ function getAllMovieTitles(title) {
  */
 function getHighestMetascore(metascore) {
 
+  for(let i = 0; i < metascore.length; i++) {
+    if (ghyh) {
+      return getHighestMetascore;
+    } else {
+      return 0;
+    }
+  }
 
 
   return ;
