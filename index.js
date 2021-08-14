@@ -3,6 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -28,10 +29,10 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles(title) {
+function getAllMovieTitles(movies) {
   let titlesMoviesArr = [];
-  for(let i = 0; i < title.length;i++){
-    titlesMoviesArr.push(title[i].title)
+  for(let i = 0; i < movies.length;i++){
+    titlesMoviesArr.push(movies[i].title)
   }
   return titlesMoviesArr;
 }
@@ -47,18 +48,14 @@ function getAllMovieTitles(title) {
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore(metascore) {
-
-  for(let i = 0; i < metascore.length; i++) {
-    if (ghyh) {
-      return getHighestMetascore;
-    } else {
-      return 0;
-    }
+function getHighestMetascore(movies) {
+  let highestMeta = 0;
+  for(let i = 0; i < movies.length; i++) {
+   if(movies[i].metascore > highestMeta){
+     highestMeta = Number(movies[i].metascore);
+   }
   }
-
-
-  return ;
+  return highestMeta;
 }
 
 /**
@@ -72,7 +69,13 @@ function getHighestMetascore(metascore) {
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+  let total = 0;
+  for(let i = 0; i < movies.length; i++) {
+      total += Number(movies[i].imdbRating) / movies.length;
+  }
+  return total ;
+}
 
 /**
  * countByRating()
@@ -85,7 +88,17 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+  let moviesObj = {};
+  for(let movie of movies){
+      if (!moviesObj[movie.rated]){
+          moviesObj[movie.rated] = 1;
+      } else {
+          moviesObj[movie.rated] += 1
+      }
+  }
+  return moviesObj;
+}
 
 /**
  * findById()
@@ -101,7 +114,20 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+if (movies.length === 0){
+  return null;
+}
+
+for (let i =0; i < movies.length; i++) {
+if(movies[i].imdbID === id) {
+     movies.push(movies.title);
+  } else {
+    return null;
+  }
+
+}
+}
 
 /**
  * filterByGenre()
@@ -123,7 +149,16 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) { 
+  let movieGenArr = [];
+   for(let i= 0; i < movies.length; i++){
+      if(movies.genre === genre){
+          movieGenArr.push(movies.title)
+      }
+  }
+
+  return  movieGenArr; 
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
