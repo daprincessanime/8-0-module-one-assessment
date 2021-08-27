@@ -51,7 +51,7 @@ function getAllMovieTitles(movies) {
 function getHighestMetascore(movies) {
   let highestMeta = 0;
   for(let i = 0; i < movies.length; i++) {
-   if(movies[i].metascore > highestMeta){
+   if(Number(movies[i].metascore) > highestMeta){
      highestMeta = Number(movies[i].metascore);
    }
   }
@@ -99,7 +99,7 @@ function countByRating(movies) {
   }
   return moviesObj;
 }
-
+countByRating(exampleMovies)
 /**
  * findById()
  * -----------------------------
@@ -121,12 +121,10 @@ if (movies.length === 0){
 
 for (let i =0; i < movies.length; i++) {
 if(movies[i].imdbID === id) {
-     movies.push(movies.title);
-  } else {
-    return null;
+     return movies[i];
   }
-
 }
+return null;
 }
 
 /**
@@ -151,12 +149,17 @@ if(movies[i].imdbID === id) {
  */
 function filterByGenre(movies, genre) { 
   let movieGenArr = [];
-   for(let i= 0; i < movies.length; i++){
-      if(movies.genre === genre){
-          movieGenArr.push(movies.title)
-      }
-  }
-
+  //  for(let i= 0; i < movies.length; i++){
+  //     if(movies.genre.toLowerCase() === genre.toLowerCase()){
+  //         movieGenArr.push(movies.title)
+  //     }
+  // }
+ for(movie of movies){
+   let lowerCase = movies.genre.toLowerCase();
+   if(lowerCase.includes(genre.toLowerCase())) {
+     movieGenArr.push(movie)
+   }
+ }
   return  movieGenArr; 
 }
 
